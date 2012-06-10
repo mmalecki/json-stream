@@ -1,0 +1,51 @@
+var assert = require('assert'),
+    JSONStream = require('../lib/json-stream');
+
+function write(stream) {
+  var writes = [];
+  for (var i = 1; i < arguments.length; i++) {
+    writes[i - 1] = arguments[i];
+  }
+  writes.forEach(function (write) {
+    stream.write(write);
+  });
+  stream.end();
+}
+
+function expect(stream, events) {
+  var chunks = [], endCalled = false;
+  stream.on('data', function (d) {
+    chunks.push(d);
+  });
+  stream.on('end', function () {
+    endCalled = true;
+  });
+  process.on('exit', function () {
+    assert.deepEqual(chunks, events);
+    assert(endCalled);
+  });
+}
+
+var stream = new JSONStream();
+expect(stream, [ { a: 42 } ]);
+write(stream, '{"a": 42}\n');
+
+stream = new JSONStream();
+expect(stream, [ { a: 42 } ]);
+write(stream, '{"a":', '42}\n');
+
+stream = new JSONStream();
+expect(stream, [ { a: 42, b: 1337 } ]);
+write(stream, '{"a":', '42', ',"b": 1337', '}\n');
+
+stream = new JSONStream();
+expect(stream, [ { a: 42, b: 1337 }, { hello: 'world' } ]);
+write(stream, '{"a":', '42', ',"b": 1337', '}\n{"hel', 'lo": "wor', 'ld"}\n');
+
+stream = new JSONStream();
+expect(stream, [ { a: 42 }, { hello: 'world' } ]);
+write(stream, '{"a":', '42}\n{ blah blah blah }\n{"hel', 'lo": "wor', 'ld"}\n');
+
+stream = new JSONStream();
+expect(stream, [ { a: 42 }, { hello: 'world' } ]);
+write(stream, '{"a":', '42}\n{ blah blah', 'blah }\n{"hel', 'lo": "wor', 'ld"}\n');
