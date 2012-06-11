@@ -1,0 +1,10 @@
+{
+  "name": "json-stream",
+  "version": "0.0.0",
+  "description": "New line-delimeted JSON parser with a stream interface",
+  "author": "Maciej Małecki <me@mmalecki.com>",
+  "main": "./lib/json-stream",
+  "scripts": {
+    "test": "node test/pipe-test.js && node test/json-stream-test.js"
+  }
+}
