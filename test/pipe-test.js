@@ -1,6 +1,6 @@
 var assert = require('assert'),
     Stream = require('stream'),
-    JSONStream = require('../lib/json-stream');
+    JSONStream = require('../');
 
 var source = new Stream(),
     dest = new JSONStream(),

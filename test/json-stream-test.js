@@ -1,5 +1,5 @@
 var assert = require('assert'),
-    JSONStream = require('../lib/json-stream');
+    JSONStream = require('../');
 
 function write(stream) {
   var writes = [];
