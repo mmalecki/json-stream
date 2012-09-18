@@ -26,26 +26,26 @@ function expect(stream, events) {
   });
 }
 
-var stream = new JSONStream();
+var stream = JSONStream();
 expect(stream, [ { a: 42 } ]);
 write(stream, '{"a": 42}\n');
 
-stream = new JSONStream();
+stream = JSONStream();
 expect(stream, [ { a: 42 } ]);
 write(stream, '{"a":', '42}\n');
 
-stream = new JSONStream();
+stream = JSONStream();
 expect(stream, [ { a: 42, b: 1337 } ]);
 write(stream, '{"a":', '42', ',"b": 1337', '}\n');
 
-stream = new JSONStream();
+stream = JSONStream();
 expect(stream, [ { a: 42, b: 1337 }, { hello: 'world' } ]);
 write(stream, '{"a":', '42', ',"b": 1337', '}\n{"hel', 'lo": "wor', 'ld"}\n');
 
-stream = new JSONStream();
+stream = JSONStream();
 expect(stream, [ { a: 42 }, { hello: 'world' } ]);
 write(stream, '{"a":', '42}\n{ blah blah blah }\n{"hel', 'lo": "wor', 'ld"}\n');
 
-stream = new JSONStream();
+stream = JSONStream();
 expect(stream, [ { a: 42 }, { hello: 'world' } ]);
 write(stream, '{"a":', '42}\n{ blah blah', 'blah }\n{"hel', 'lo": "wor', 'ld"}\n');

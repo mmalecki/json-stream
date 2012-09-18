@@ -3,7 +3,7 @@ var assert = require('assert'),
     JSONStream = require('../');
 
 var source = new Stream(),
-    dest = new JSONStream(),
+    dest = JSONStream(),
     chunks = [],
     endCalled = false;
 
