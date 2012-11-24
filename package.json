@@ -1,6 +1,6 @@
 {
   "name": "json-stream",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "New line-delimeted JSON parser with a stream interface",
   "author": "Maciej Małecki <me@mmalecki.com>",
   "main": "./lib/json-stream",
