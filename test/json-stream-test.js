@@ -14,8 +14,11 @@ function write(stream) {
 
 function expect(stream, events) {
   var chunks = [], endCalled = false;
-  stream.on('data', function (d) {
-    chunks.push(d);
+  stream.on('readable', function () {
+    var chunk = stream.read();
+    if (chunk) {
+      chunks.push(chunk);
+    }
   });
   stream.on('end', function () {
     endCalled = true;

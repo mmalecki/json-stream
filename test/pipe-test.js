@@ -1,8 +1,8 @@
 var assert = require('assert'),
-    Stream = require('stream'),
+    ReadableStream = require('stream').Readable,
     JSONStream = require('../');
 
-var source = new Stream(),
+var source = new ReadableStream(),
     dest = JSONStream(),
     chunks = [],
     endCalled = false;
@@ -12,8 +12,11 @@ var wantedChunks = [
   { hello: 'world' }
 ];
 
-dest.on('data', function (c) {
-  chunks.push(c);
+dest.on('readable', function () {
+  var chunk = dest.read();
+  if (chunk) {
+    chunks.push(chunk);
+  }
 });
 
 dest.on('end', function () {
@@ -25,9 +28,12 @@ process.on('exit', function () {
   assert(endCalled);
 });
 
+var source = new ReadableStream();
+source._read = function () {
+};
 source.pipe(dest);
-source.emit('data', '{"a": 4');
-source.emit('data', '2}\nblah');
-source.emit('data', '\n{"hello"');
-source.emit('data', ': "world"}\n');
-source.emit('end');
+source.push('{"a": 4');
+source.push('2}\nblah');
+source.push('\n{"hello"');
+source.push(': "world"}\n');
+source.push(null);
