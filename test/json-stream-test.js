@@ -52,3 +52,8 @@ write(stream, '{"a":', '42}\n{ blah blah blah }\n{"hel', 'lo": "wor', 'ld"}\n');
 stream = JSONStream();
 expect(stream, [ { a: 42 }, { hello: 'world' } ]);
 write(stream, '{"a":', '42}\n{ blah blah', 'blah }\n{"hel', 'lo": "wor', 'ld"}\n');
+
+stream = JSONStream();
+expect(stream, [ { å: '⇢ utf8!', b: 1337 } ]);
+write(stream, '{"å": "⇢ utf8!", "b": 1337 }\n');
+
