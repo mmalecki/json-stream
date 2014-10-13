@@ -5,6 +5,6 @@
   "author": "Maciej Małecki <me@mmalecki.com>",
   "main": "./lib/json-stream",
   "scripts": {
-    "test": "node test/pipe-test.js && node test/json-stream-test.js"
+    "test": "node test/pipe-test.js && node test/json-stream-test.js && node test/throw-in-readable-test.js"
   }
 }
