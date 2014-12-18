@@ -57,3 +57,6 @@ stream = JSONStream();
 expect(stream, [ { å: '⇢ utf8!', b: 1337 } ]);
 write(stream, '{"å": "⇢ utf8!", "b": 1337 }\n');
 
+stream = JSONStream({ async: true });
+expect(stream, [ { å: '⇢ utf8!', b: 1337 } ]);
+write(stream, '{"å": "⇢ utf8!", "b": 1337 }\n');
