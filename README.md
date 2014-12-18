@@ -9,7 +9,7 @@ New line-delimeted JSON parser with a stream interface.
 ```js
 var JSONStream = require('json-stream');
 
-var stream = new JSONStream();
+var stream = JSONStream();
 
 stream.on('data', function (chunk) {
   console.dir(chunk);
