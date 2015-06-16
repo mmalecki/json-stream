@@ -1,4 +1,4 @@
-# json-stream [![Build Status](https://secure.travis-ci.org/mmalecki/json-stream.png)](http://travis-ci.org/mmalecki/json-stream)
+# json-stream [![Build Status](https://secure.travis-ci.org/mmalecki/json-stream.png?branch=master)](http://travis-ci.org/mmalecki/json-stream)
 New line-delimeted JSON parser with a stream interface.
 
 ## Installation
