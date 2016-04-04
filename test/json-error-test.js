@@ -22,6 +22,9 @@ stream.on('end', function () {
 });
 
 stream.write('{"this": "is valid JSON"}\n');
-stream.write('{this is not valid JSON]\n');
+try {
+  stream.write('{this is not valid JSON]\n');
+} catch (e) {
+}
 stream.write('["this", "is", "valid", "JSON"]\n');
 stream.end();
