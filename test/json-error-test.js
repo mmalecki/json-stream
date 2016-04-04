@@ -14,6 +14,13 @@ stream.on('error', function (error) {
   assert.equal(error.message, 'Unexpected token t');
 });
 
+stream.on('end', function () {
+  assert.equal(objects.length, 3);
+  assert.deepEqual(objects[0], {"this": "is valid JSON"});
+  assert.equal(objects[1].message, 'Unexpected token t');
+  assert.deepEqual(objects[2], ["this", "is", "valid", "JSON"]);
+});
+
 stream.write('{"this": "is valid JSON"}\n');
 stream.write('{this is not valid JSON]\n');
 stream.write('["this", "is", "valid", "JSON"]\n');
