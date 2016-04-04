@@ -33,7 +33,7 @@ source._read = function () {
 };
 source.pipe(dest);
 source.push('{"a": 4');
-source.push('2}\nblah');
+source.push('2}');
 source.push('\n{"hello"');
 source.push(': "world"}\n');
 source.push(null);
