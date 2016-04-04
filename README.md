@@ -25,5 +25,3 @@ Will output:
 { a: 42 }
 { hello: 'world' }
 ```
-
-If invalid JSON gets written, it's silently ignored.
