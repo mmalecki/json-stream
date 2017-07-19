@@ -29,6 +29,22 @@ function expect(stream, events) {
   });
 }
 
+function expectSideEffect(stream, evnetName, events) {
+  var lines = [], endCalled = false;
+  stream.on(evnetName, function (line) {
+    if (line) {
+      lines.push(line.toString());
+    }
+  });
+  stream.on('end', function () {
+    endCalled = true;
+  });
+  process.on('exit', function () {
+    assert.deepEqual(lines, events);
+    assert(endCalled);
+  });
+}
+
 var stream = JSONStream();
 expect(stream, [ { a: 42 } ]);
 write(stream, '{"a": 42}\n');
@@ -36,6 +52,11 @@ write(stream, '{"a": 42}\n');
 stream = JSONStream();
 expect(stream, [ { a: 42 } ]);
 write(stream, '{"a":', '42}\n');
+
+stream = JSONStream();
+expect(stream, [ { a: 42 } ]);
+expectSideEffect(stream, 'parsefail', [ 'blah' ]);
+write(stream, '{"a":', '42}\n','blah\n');
 
 stream = JSONStream();
 expect(stream, [ { a: 42, b: 1337 } ]);
