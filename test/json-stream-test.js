@@ -14,11 +14,8 @@ function write(stream) {
 
 function expect(stream, events) {
   var chunks = [], endCalled = false;
-  stream.on('readable', function () {
-    var chunk = stream.read();
-    if (chunk) {
-      chunks.push(chunk);
-    }
+  stream.on('data', function (chunk) {
+    chunks.push(chunk);
   });
   stream.on('end', function () {
     endCalled = true;
@@ -36,6 +33,10 @@ write(stream, '{"a": 42}\n');
 stream = JSONStream();
 expect(stream, [ { a: 42 } ]);
 write(stream, '{"a":', '42}\n');
+
+stream = JSONStream();
+expect(stream, [ { a: 42 } ]);
+write(stream, '{"a":', '42}', '\n');
 
 stream = JSONStream();
 expect(stream, [ { a: 42, b: 1337 } ]);
