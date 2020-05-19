@@ -3,10 +3,10 @@ var assert = require('assert'),
 
 var stream = JSONStream();
 
-stream.on('readable', function () {
+stream.on('data', function () {
   throw new Error('This should crash and burn.');
 });
 
 assert.throws(function () {
   stream.write('{"a":"b"}\n');
-}, 'write with a throwing `readable` handler should throw');
+}, 'write with a throwing `data` handler should throw');
