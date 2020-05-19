@@ -35,6 +35,10 @@ expect(stream, [ { a: 42 } ]);
 write(stream, '{"a":', '42}\n');
 
 stream = JSONStream();
+expect(stream, [ { a: 42 } ]);
+write(stream, '{"a":', '42}', '\n');
+
+stream = JSONStream();
 expect(stream, [ { a: 42, b: 1337 } ]);
 write(stream, '{"a":', '42', ',"b": 1337', '}\n');
 
